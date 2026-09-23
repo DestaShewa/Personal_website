@@ -1,26 +1,40 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-inter);
+  
+  --color-background: #0A0F1E;
+  --color-surface: #111827;
+  --color-surface-elevated: #1a2235;
+  --color-accent: #3B82F6;
+  --color-accent-glow: #60A5FA;
+  --color-text-primary: #F1F5F9;
+  --color-text-secondary: #94A3B8;
+  --color-border: #1E293B;
+  --color-success: #10B981;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  /* The layout.js will apply the font variables */
+}
+
+/* Custom Utilities for gradients and glows */
+@utility text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, var(--color-text-primary), var(--color-text-secondary));
+}
+
+@utility text-gradient-accent {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, var(--color-accent), var(--color-accent-glow));
 }
