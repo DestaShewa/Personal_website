@@ -36,8 +36,8 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="text-white font-bold mb-1">Email</h3>
-                      <a href="mailto:hello@example.com" className="text-text-secondary hover:text-accent transition-colors">
-                        hello@example.com
+                      <a href="mailto:destashewa67@gmail.com" className="text-text-secondary hover:text-accent transition-colors">
+                        destashewa67@gmail.com
                       </a>
                     </div>
                   </div>
@@ -76,4 +76,3 @@ export default function ContactPage() {
     </>
   );
 }
-

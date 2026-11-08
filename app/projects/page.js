@@ -8,7 +8,7 @@ import { getAllProjects } from '../../lib/projects';
 
 export const metadata = {
   title: 'Projects | Desta - Full-Stack Web Developer',
-  description: 'Explore my full-stack web applications, React frontends, REST APIs, and PostgreSQL databases.',
+  description: 'Explore full-stack applications, backend workflows, business websites, and frontend projects.',
 };
 
 export default function ProjectsPage() {
@@ -41,4 +41,3 @@ export default function ProjectsPage() {
     </>
   );
 }
-

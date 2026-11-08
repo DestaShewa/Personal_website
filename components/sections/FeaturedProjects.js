@@ -20,7 +20,7 @@ export function FeaturedProjects() {
 
         <AnimatedSection staggerChildren={true} className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-16">
           {featuredProjects.map((project, index) => (
-            <AnimatedItem key={project.id} className={index === 2 ? 'lg:col-span-2 lg:max-w-3xl lg:mx-auto w-full' : ''}>
+            <AnimatedItem key={project.id}>
               <ProjectCard project={project} priority={index === 0} />
             </AnimatedItem>
           ))}
@@ -41,4 +41,3 @@ export function FeaturedProjects() {
     </section>
   );
 }
-

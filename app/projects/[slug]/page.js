@@ -17,7 +17,8 @@ export async function generateStaticParams() {
 
 // Generate metadata for each project dynamically
 export async function generateMetadata({ params }) {
-  const project = getProjectBySlug(params.slug);
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
   
   if (!project) return { title: 'Project Not Found' };
   
@@ -32,8 +33,9 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function ProjectCaseStudy({ params }) {
-  const project = getProjectBySlug(params.slug);
+export default async function ProjectCaseStudy({ params }) {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
 
   if (!project) {
     notFound();
@@ -101,10 +103,10 @@ export default function ProjectCaseStudy({ params }) {
             {/* Context */}
             <AnimatedItem className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="md:col-span-1 border-t border-border pt-6">
-                <h3 className="text-sm font-bold text-text-primary uppercase tracking-wider mb-4">Tech Stack</h3>
+                <h3 className="text-sm font-bold text-text-primary uppercase tracking-wider mb-4">Skills &amp; Focus</h3>
                 <ul className="flex flex-col gap-2 text-text-secondary">
-                  {project.techStack.map(tech => (
-                    <li key={tech}>{tech}</li>
+                  {project.highlights.map(highlight => (
+                    <li key={highlight}>{highlight}</li>
                   ))}
                 </ul>
               </div>
@@ -118,7 +120,7 @@ export default function ProjectCaseStudy({ params }) {
 
             {/* Problem & Solution */}
             <AnimatedItem>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">The Problem</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">Why It Matters</h2>
               <p className="text-lg text-text-secondary leading-relaxed mb-12">
                 {project.problem}
               </p>
@@ -131,7 +133,7 @@ export default function ProjectCaseStudy({ params }) {
 
             {/* Key Features */}
             <AnimatedItem className="bg-surface border border-border rounded-2xl p-8 md:p-10">
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">Key Features</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">Project Highlights</h2>
               <ul className="space-y-4">
                 {project.features.map((feature, i) => (
                   <li key={i} className="flex items-start gap-4 text-text-secondary">
@@ -148,7 +150,7 @@ export default function ProjectCaseStudy({ params }) {
 
             {/* The Result */}
             <AnimatedItem>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">The Result</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">How It Is Marketed</h2>
               <p className="text-lg text-text-secondary leading-relaxed">
                 {project.result}
               </p>
@@ -162,4 +164,3 @@ export default function ProjectCaseStudy({ params }) {
     </>
   );
 }
-

@@ -4,48 +4,69 @@ import { SectionHeader } from '../../components/ui/SectionHeader';
 import { ContactCTA } from '../../components/sections/ContactCTA';
 import { AnimatedSection, AnimatedItem } from '../../components/ui/AnimatedSection';
 import { Button } from '../../components/ui/Button';
+import Link from 'next/link';
+import { getProjectBySlug } from '../../lib/projects';
 
 export const metadata = {
   title: 'Services | Desta - Full-Stack Web Developer',
-  description: 'Frontend, backend, PostgreSQL, and full-stack web development services.',
+  description: 'Full-stack web applications, React and Next.js frontend development, Node.js APIs, business websites, and dashboards.',
 };
 
 export default function ServicesPage() {
   const specializedServices = [
     {
-      title: 'Frontend Architecture & Development',
-      description: 'I build modern, responsive, and highly interactive user interfaces that users love. My focus is on creating maintainable component architectures that scale as your application grows.',
-      technologies: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'TypeScript'],
+      title: 'Full-Stack Web Application Development',
+      description: 'Build complete web applications that bring frontend, backend, and data workflows together.',
+      projectSlugs: ['personal-finance-dashboard', 'wbocs'],
       deliverables: [
-        'Responsive Web Applications',
-        'Interactive Dashboards',
-        'E-commerce Storefronts',
-        'Design System Implementation',
-        'Performance Optimization (Core Web Vitals)'
+        'Frontend and backend integration',
+        'Authentication and role-based workflows',
+        'Database-backed application features',
+        'End-to-end web application development'
       ]
     },
     {
-      title: 'Backend API Engineering',
-      description: 'I design and implement robust server-side architectures that securely power your frontend applications. I prioritize clean code, secure authentication, and optimized performance.',
-      technologies: ['Node.js', 'Express', 'Next.js API Routes', 'JWT Auth', 'REST'],
+      title: 'React / Next.js Frontend Development',
+      description: 'Create responsive, polished interfaces for web applications and business websites.',
+      projectSlugs: ['wbocs', 'adamu-solar'],
       deliverables: [
-        'RESTful API Development',
-        'Third-party API Integrations (Stripe, Twilio, etc.)',
-        'Authentication & Authorization Systems',
-        'Serverless Functions',
-        'Microservices Architecture'
+        'Responsive web interfaces',
+        'React and Next.js frontend development',
+        'Multilingual interface implementation',
+        'Frontend integration with application APIs'
       ]
     },
     {
-      title: 'Database Design & Management',
-      description: 'Data is the core of any serious application. I design normalized relational database schemas that ensure data integrity while optimizing for query performance.',
-      technologies: ['PostgreSQL', 'Prisma', 'SQL', 'Database Modeling', 'Indexing'],
+      title: 'Node.js Backend & REST API Development',
+      description: 'Develop application backends, REST APIs, role-based access, and real-time integrations.',
+      projectSlugs: ['wbocs', 'personal-finance-dashboard'],
       deliverables: [
-        'Relational Database Schema Design',
-        'Complex Query Optimization',
-        'Data Migration Scripts',
-        'Secure Data Storage solutions',
-        'Database Performance Tuning'
+        'Node.js backend development',
+        'REST API design and integration',
+        'Authentication and authorization workflows',
+        'Real-time application communication'
+      ]
+    },
+    {
+      title: 'Business Website Development',
+      description: 'Present your business professionally with responsive, multilingual web experiences.',
+      projectSlugs: ['adamu-solar'],
+      deliverables: [
+        'Professional business presentation',
+        'Responsive website development',
+        'Multilingual interface support',
+        'Website deployment'
+      ]
+    },
+    {
+      title: 'Dashboard & Admin Panel Development',
+      description: 'Build interfaces for transaction management, institutional workflows, and administration.',
+      projectSlugs: ['personal-finance-dashboard', 'wbocs'],
+      deliverables: [
+        'Financial transaction dashboards',
+        'Institutional and role-based workflows',
+        'Administrative interfaces',
+        'Connected frontend and backend features'
       ]
     }
   ];
@@ -58,8 +79,8 @@ export default function ServicesPage() {
           <AnimatedSection>
             <SectionHeader 
               eyebrow="My Capabilities"
-              title="End-to-End Web Development"
-              description="I offer specialized services across the entire web stack, allowing me to take your project from initial database design all the way to a polished frontend interface."
+              title="Web Development Services"
+              description="Focused services across full-stack applications, React and Next.js frontends, Node.js APIs, business websites, and dashboards."
               centered={false}
             />
           </AnimatedSection>
@@ -70,19 +91,30 @@ export default function ServicesPage() {
                 <AnimatedItem key={index} className="border-t border-border pt-12 first:border-0 first:pt-0">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                     <div>
+                      <p className="text-sm font-bold uppercase tracking-wider text-accent mb-3">
+                        Priority {index + 1}
+                      </p>
                       <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">{service.title}</h2>
                       <p className="text-lg text-text-secondary leading-relaxed mb-8">
                         {service.description}
                       </p>
                       
-                      <h3 className="text-sm font-bold text-text-primary uppercase tracking-wider mb-4">Core Technologies</h3>
-                      <div className="flex flex-wrap gap-2">
-                        {service.technologies.map(tech => (
-                          <span key={tech} className="px-3 py-1 bg-surface-elevated rounded-md text-sm font-medium text-slate-300 border border-border">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
+                      <h3 className="text-sm font-bold text-text-primary uppercase tracking-wider mb-4">Related Projects</h3>
+                      <ul className="flex flex-wrap gap-x-5 gap-y-2">
+                        {service.projectSlugs.map((slug) => {
+                          const project = getProjectBySlug(slug);
+                          return (
+                            <li key={slug}>
+                              <Link
+                                href={`/projects/${project.slug}`}
+                                className="font-medium text-accent hover:text-accent-glow transition-colors"
+                              >
+                                {project.title}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
                     </div>
                     
                     <div className="bg-surface border border-border rounded-2xl p-8">
@@ -117,4 +149,3 @@ export default function ServicesPage() {
     </>
   );
 }
-
